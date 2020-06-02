@@ -1,0 +1,30 @@
+.Foot {
+    /* border: green 1px solid; */
+    padding: 20px 100px;
+
+    width: 100%;
+    /* position: fixed;
+    bottom: 0;
+    left: 0; */
+
+    background: #313131;
+    color: #EBEBEB;
+
+    /* display */
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 200px;
+}
+
+.footerText {
+    margin: 0;
+}
+
+/* 420 - mobile */
+@media screen and (max-width: 420px) {
+    .Foot {
+        padding: 20px 50px;
+        margin-top: 100px;
+    }
+}

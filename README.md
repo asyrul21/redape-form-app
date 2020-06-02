@@ -2,9 +2,20 @@
 This repo stores the application code for the technical assessment given by Redape Solutions. For this assessment, I will be attempting the FrontEnd part of the application.
 
 ## Kickstarting with Create React App
+1. Create app
 ```bash
 npx create-react-app redape-form-app --use-npm
 ```
+
+2. Run
+```bash
+npm start
+```
+
+## Fixing CORS Issue
+
+https://stackoverflow.com/questions/56781610/from-origin-http-localhost3000-has-been-blocked-by-cors-policy-no-acces/56781665
+
 
 ## Available Scripts
 

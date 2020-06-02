@@ -1,0 +1,39 @@
+.paginationContainer {
+    height: 30px;
+}
+
+.paginator {
+    width: 390px;
+    height: 100%;
+
+    /* display */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+}
+
+.page {
+    margin: 0 2px;
+    height: 30px;
+    line-height: 30px;
+
+    font-size: 14px;
+    text-align: center;
+    width: 30px;
+
+    cursor: pointer;
+}
+
+.page:not(.activePage):hover{
+    font-weight: bold;
+    color: white;
+    background:lightgrey;
+}
+
+.activePage {
+    font-weight: bold;
+    color: white;
+    background: #527E8C;
+}
