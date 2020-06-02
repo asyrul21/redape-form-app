@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# RedApe Form App
+This repo stores the application code for the technical assessment given by Redape Solutions. For this assessment, I will be attempting the FrontEnd part of the application.
+
+## Kickstarting with Create React App
+```bash
+npx create-react-app redape-form-app --use-npm
+```
 
 ## Available Scripts
 
