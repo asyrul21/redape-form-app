@@ -42,6 +42,18 @@ accepts one of the following formats:
 - +31636363634
 - 075-63546725
 
+# Reduxation
+1. Install
+```bash
+npm install redux react-redux redux-thunk
+```
+2. Error handling
+
+https://www.firehydrant.io/blog/graceful-error-handling-with-redux/
+
+3. Redux crash course
+
+https://www.youtube.com/watch?v=93p3LxR9xfM
 
 ## Fixing CORS Issue
 

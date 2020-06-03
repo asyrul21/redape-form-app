@@ -5,13 +5,19 @@ import BaseLayout from './components/layouts/BaseLayout'
 import ContentContainer from './components/layouts/ContentContainer';
 import Main from './components/main';
 
+// redux
+import { Provider } from 'react-redux';
+import store from './store'
+
 function App() {
   return (
-    <BaseLayout>
-      <ContentContainer>
-        <Main />
-      </ContentContainer>
-    </BaseLayout >
+    <Provider store={store}>
+      <BaseLayout>
+        <ContentContainer>
+          <Main />
+        </ContentContainer>
+      </BaseLayout >
+    </Provider>
   );
 }
 

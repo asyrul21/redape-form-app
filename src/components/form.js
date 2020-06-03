@@ -2,30 +2,35 @@ import React from 'react'
 import './form.css'
 
 import Output from './output'
+// redux
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { submitForm, getSlug } from '../actions/fieldsActions'
 
 
 class Form extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             submitted: false,
             email: '',
             gender: '',
             state: '',
             contact: '',
-            hidden: '',
-            data: []
+            hidden: ''
         }
-        this.handleSubmit = this.handleSubmit.bind(this)
         this.initForm = this.initForm.bind(this)
-        this.getSlug = this.getSlug.bind(this)
-        this.validate = this.validate.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    initForm() {
-        // set default values
-        this.props.fields.map((field, idx) => {
-            let fieldSlug = this.getSlug(field)
+    componentWillReceiveProps(nextProps) {
+        console.log('Next props:', nextProps);
+        this.initForm(nextProps.fields)
+    }
+
+    initForm(fieldsArray) {
+        fieldsArray.map((field, idx) => {
+            let fieldSlug = getSlug(field)
 
             // if contain deault
             if (field.default) {
@@ -33,7 +38,6 @@ class Form extends React.Component {
                     [`${fieldSlug}`]: field.default
                 })
             }
-
             // if hidden (no label)
             if (!field.label) {
                 this.setState({
@@ -43,63 +47,27 @@ class Form extends React.Component {
         })
     }
 
-    componentWillMount() {
-        this.initForm()
-    }
-
-    getSlug(field) {
-        return field.label ?
-            `${field.label.split(" ")[0].toLowerCase()}` :
-            'hidden'
-    }
-
-    validate(field, value) {
-        let valid = true
-        // check mandatory
-        if (!field.isOptional && !value) valid = false
-        // email has been validated by form
-
-        // check value type
-        if (field.type === 'telephone') {
-            if (!value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/))
-                valid = false
-        }
-        // taken from
-        // https://stackoverflow.com/questions/4338267/validate-phone-number-with-javascript
-
-        return valid
-    }
-
-    async handleSubmit(event, fields) {
+    handleSubmit(event, fields) {
         event.preventDefault();
 
-        let result = []
-        // create json object and store in list
-        fields.map((field, idx) => {
-            let fieldSlug = this.getSlug(field)
-            let value = this.state[`${fieldSlug}`]
-            let obj = {
-                label: field.label ? field.label : '(no label)',
-                value: value,
-                isValid: this.validate(field, value)
-            }
-            result.push(obj)
-        })
+        const values = {
+            email: this.state.email,
+            gender: this.state.gender,
+            state: this.state.state,
+            contact: this.state.contact,
+            hidden: this.state.hidden,
+        }
 
-        // store result in state
-        this.setState({
+        // call action // embeds result to this.props.result
+        this.props.submitForm(this.props.fields, values)
+
+        // resut form
+        return this.setState({
             submitted: true,
-            data: result,
-            // reset
             email: '',
-            gender: '',
-            state: '',
             contact: '',
             hidden: '',
         })
-
-        // reinit form
-        this.initForm()
     }
 
     handleChange(event, field) {
@@ -118,7 +86,7 @@ class Form extends React.Component {
                     {
                         this.props.fields.map((field, idx) => {
                             // bind to state values
-                            let fieldSlug = this.getSlug(field)
+                            let fieldSlug = getSlug(field)
                             return (
                                 <>
                                     {
@@ -209,12 +177,24 @@ class Form extends React.Component {
                 </form>
                 {
                     this.state.submitted &&
-                    <Output data={this.state.data} />
+                    <Output />
                 }
             </React.Fragment >
         )
     }
 }
 
-export default Form
+// redux
+const mapStateToProps = state => ({
+    result: state.fields.result,
+    fields: state.fields.items
+})
+
+Form.propTypes = {
+    submitForm: PropTypes.func.isRequired,
+    fields: PropTypes.array.isRequired,
+    result: PropTypes.array
+}
+
+export default connect(mapStateToProps, { submitForm })(Form)
 
