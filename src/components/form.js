@@ -61,9 +61,10 @@ class Form extends React.Component {
         // call action // embeds result to this.props.result
         this.props.submitForm(this.props.fields, values)
 
-        // resut form
+        // reset form
         return this.setState({
             submitted: true,
+            gender: '',
             email: '',
             contact: '',
             hidden: '',
