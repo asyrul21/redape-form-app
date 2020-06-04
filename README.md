@@ -55,6 +55,45 @@ https://www.firehydrant.io/blog/graceful-error-handling-with-redux/
 
 https://www.youtube.com/watch?v=93p3LxR9xfM
 
+## Deployment
+
+Refer: https://github.com/asyrul21/movieApp
+
+1. Install serve
+```bash
+npm install serve --save
+```
+
+2. Modify package.json
+```json
+  "scripts": {
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+```
+
+3. To run locally, change package.json back to
+```json
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+```
+
+4. Heroku create and deploy
+```bash
+heroku create redape-react-app
+
+-commit your changes
+
+git push heroku master
+```
+
+
 ## Fixing CORS Issue
 
 https://stackoverflow.com/questions/56781610/from-origin-http-localhost3000-has-been-blocked-by-cors-policy-no-acces/56781665
