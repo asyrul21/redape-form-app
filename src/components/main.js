@@ -8,16 +8,7 @@ import { fetchFields } from '../actions/fieldsActions'
 import PropTypes from 'prop-types'
 
 class Main extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            apiError: false,
-            fieldsFetched: false
-        }
-    }
-
     componentWillMount() {
-        // embed result to this.props.fields
         this.props.fetchFields()
     }
 
